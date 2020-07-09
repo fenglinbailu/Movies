@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neuedu.dao.Recommend_movieMapper" >
+  <resultMap id="BaseResultMap" type="com.neu.po.Recommend_movie" >
+    <id column="m_id" property="mId" jdbcType="VARCHAR" />
+    <result column="recommend_movie_id" property="recommendMovieId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    m_id, recommend_movie_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from recommend_movie
+    where m_id = #{mId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from recommend_movie
+    where m_id = #{mId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.neu.po.Recommend_movie" >
+    insert into recommend_movie (m_id, recommend_movie_id)
+    values (#{mId,jdbcType=VARCHAR}, #{recommendMovieId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.neu.po.Recommend_movie" >
+    insert into recommend_movie
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mId != null" >
+        m_id,
+      </if>
+      <if test="recommendMovieId != null" >
+        recommend_movie_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mId != null" >
+        #{mId,jdbcType=VARCHAR},
+      </if>
+      <if test="recommendMovieId != null" >
+        #{recommendMovieId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neu.po.Recommend_movie" >
+    update recommend_movie
+    <set >
+      <if test="recommendMovieId != null" >
+        recommend_movie_id = #{recommendMovieId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where m_id = #{mId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neu.po.Recommend_movie" >
+    update recommend_movie
+    set recommend_movie_id = #{recommendMovieId,jdbcType=VARCHAR}
+    where m_id = #{mId,jdbcType=VARCHAR}
+  </update>
+</mapper>
