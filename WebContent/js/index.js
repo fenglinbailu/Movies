@@ -6,7 +6,7 @@ var search;
 $(document)
 		.ready(
 				function() {
-					    
+					
 						$.ajax({
 									url : "RecommendServlet",
 									type : "post",
@@ -36,7 +36,8 @@ $(document)
 //												+ '</div>';
 //										//$('#sresult').append($html1)     
 //										//$($html1).insertBefore($('#sresult'));
-										alert(jsonObj.uid)
+										//alert(jsonObj.data)
+										$('#userlog').text(jsonObj.uid)
 										$.each(jsonObj.data,function(i,item) {
 															
 															// 循环获取数据

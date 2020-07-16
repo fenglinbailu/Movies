@@ -14,6 +14,7 @@ import com.neu.po.Movie;
 import com.neu.po.User;
 import com.neu.util.Recommendbyuserimpl;
 
+
 /**
  * Servlet implementation class RecommendServlet
  */
@@ -36,12 +37,15 @@ public class RecommendServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String userId=((User)request.getSession().getAttribute("user")).getuId()+"";
 		System.out.println("sesson= "+userId);
+		
+		
 		if (userId!="") {
 		Recommendbyuserimpl rec = new Recommendbyuserimpl();
 		List <Movie> mov=rec.Recommendbyuser(userId);
+		if(mov!=null) {
 		response.setCharacterEncoding("UTF-8");  // 加上此处可解决页面js显示乱码问题           
 		PrintWriter out=response.getWriter();
-		StringBuilder jsonString=new StringBuilder("{uid:"+userId+",\"data\":");
+		StringBuilder jsonString=new StringBuilder("{\"uid\":\""+userId+"\",\"data\":");
 		jsonString.append("[");
 		for(Movie d:mov) {
 			jsonString.append("{\"mname\":\""+d.getmName()+"\",\"img\":\""+d.getImgurl()+"\",\"mid\":\""+d.getmId()+"\"},");
@@ -54,6 +58,21 @@ public class RecommendServlet extends HttpServlet {
 		out.print(jsonString.toString());
 		out.close();
 		}
+		else
+		{
+			response.setCharacterEncoding("UTF-8");  // 加上此处可解决页面js显示乱码问题           
+			PrintWriter out=response.getWriter();
+			StringBuilder jsonString=new StringBuilder("{\"uid\":\""+userId+"\"}");
+			
+			System.out.println(jsonString);
+
+			out.print(jsonString.toString());
+			out.close();
+		}
+		
+
+		
+		}
 		
 	}
 
@@ -64,5 +83,9 @@ public class RecommendServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+	
 
 }
+
+
+
