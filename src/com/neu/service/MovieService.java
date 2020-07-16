@@ -22,5 +22,6 @@ public interface MovieService {
 	List<Movie> getSimilarMovie(String movieId);
 	List<Map> addMovieName(String movieId);
 	List<Movie> mapChangeToMovie(List<Map> list);
+	List<Movie> searchmovie(String movieName);
 	
 }

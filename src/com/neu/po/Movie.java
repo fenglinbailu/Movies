@@ -25,6 +25,23 @@ public class Movie {
 
     private String star;
 
+    public Movie(String m_id,String m_name,Integer rate,String director,String screenwriter,String actor,String type,String area,String language,Integer length,String imgurl,String star) {
+    	this.m_id=m_id;
+
+    	this.m_name=m_name;
+    	this.rate=rate;
+    	this.director=director;
+    	this.screenwriter=screenwriter;
+    	this.type=type;
+    	this.actor=actor;
+    	this.area=area;
+    	this.language=language;
+    	this.length=length;
+    	this.imgurl=imgurl;
+    	this.star=star;
+    	
+    }
+
     public String getmId() {
         return m_id;
     }

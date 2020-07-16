@@ -4,6 +4,17 @@ public class User {
     private String u_id;
 
     private String u_Passwd;
+    
+ //   public User() {}
+    
+
+    
+    public User(String u_id,String u_Passwd) {
+    	this.u_id=u_id;
+
+    	this.u_Passwd=u_Passwd;
+    	
+    }
 
     public String getuId() {
         return u_id;

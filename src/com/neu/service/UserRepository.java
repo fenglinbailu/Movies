@@ -1,30 +1,37 @@
 package com.neu.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.neu.po.User;
+import com.neuedu.dao.UserMapper;
+
+
 
 public interface UserRepository {
 
-	int insertUser(User user);
+	
+	int insertUser(User user) throws IOException;
+
+
 //  方法名：insertUser
 //	传入参数：user:User
 //	返回结果：int
 //	描述：创建新用户
 
-	int updateUser(User user);
+    int updateUser(User user) throws IOException;
 //  方法名：updateUser
 //	传入参数：user:User
 //	返回结果：int
 //	描述：更新用户信息
 
-	int deleteUser(int userId);
+    int deleteUser(String userId) throws IOException;
 // 	方法名：deleteUser
 //	传入参数：userId:int
 //	返回结果：int
 //	描述：删除指定用户
 
-	boolean loginIn(int userId,String password);
+	int loginIn(String userId,String password) throws IOException;
 //	方法名：loginIn
 //	传入参数：userId:int，password:String
 //	返回结果：boolean
@@ -77,4 +84,8 @@ public interface UserRepository {
 //	传入参数：userIde:int
 //	返回结果：boolean
 //	描述：减少用户评论数
+
+
+
+
 }
