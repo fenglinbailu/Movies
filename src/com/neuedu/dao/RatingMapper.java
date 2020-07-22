@@ -15,10 +15,11 @@ public interface RatingMapper {
 
   //  int insertSelective(Rating record);
 	
-	@Select("select * from rating where id=#{id}")
-    Rating selectByPrimaryKey(Integer id);
+	@Select("select * from rating where u_id=#{uid},m_id=#{mid}")
+    Rating select(String uid,String mid);
    
     int updateByPrimaryKeySelective(Rating record);
-	@Update("update rating set id=#{id},u_id=#{u_id},mid=#{m_id},type=#{type},rate=#{rate}")
-    int updateByPrimaryKey(Rating record);
+    
+	@Update("update rating set u_id=#{uid},mid=#{mid},rate=#{rate}")
+    int update(String uid,String mid,Integer rate);
 }

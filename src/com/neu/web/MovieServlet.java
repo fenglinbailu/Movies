@@ -3,12 +3,20 @@ package com.neu.web;
 
 
 import java.io.IOException;
+import java.io.Reader;
 import java.util.List;
 
 import com.neu.po.Movie;
+import com.neu.po.review;
 import com.neu.service.MovieService;
 import com.neu.util.MovieServiceImpl;
+import com.neu.util.Recommendbymovieimpl;
+import com.neuedu.dao.review_Mapper;
 
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 public class MovieServlet{
 	public Movie getMovie(String movieid) throws IOException{
@@ -41,10 +49,63 @@ public class MovieServlet{
 		List<Movie> list=movieservice.getRankedMovieListByPopularity(num);
 		return list;
 	}
+	public List<Movie> getMovieListByrec(String mid) throws IOException{
+		Recommendbymovieimpl movieservice = new Recommendbymovieimpl();
+		//MovieService movieservice=new MovieServiceImpl();
+		List<Movie> list=movieservice.Recommendbymovie(mid);
+		return list;
+	}
+	public static int insertreview(String a,String b,String c,String d ) throws IOException{
+		Reader inputStream=Resources.getResourceAsReader("SqlMapConfig.xml");
+		SqlSessionFactory  ssf=	new SqlSessionFactoryBuilder()
+				.build(inputStream);
+		SqlSession  ss=ssf.openSession();
+		review_Mapper  cdao=ss.getMapper(review_Mapper.class);
+		review user_review=new review(a,b,c,d);
+		cdao.insertreview(user_review);
+		ss.commit();
 
+	 return 1;
+	}
+public static int updatereview(String a,String b,String c,String d )throws IOException{
+	Reader inputStream=Resources.getResourceAsReader("SqlMapConfig.xml");
+	SqlSessionFactory  ssf=	new SqlSessionFactoryBuilder()
+			.build(inputStream);
+	SqlSession  ss=ssf.openSession();
+	review_Mapper  cdao=ss.getMapper(review_Mapper.class);
+	review user_review=new review(a,b,c,d);
+	if (cdao.find(user_review.getmId(),user_review.getuId())!=null) {
+	cdao.updatereview(user_review);
+	ss.commit();
+	return 1;
+	}
+	else return 0;
+}
+public static int deletereview(String m_id,String u_id) throws IOException{
+	Reader inputStream=Resources.getResourceAsReader("SqlMapConfig.xml");
+	SqlSessionFactory  ssf=	new SqlSessionFactoryBuilder()
+			.build(inputStream);
+	SqlSession  ss=ssf.openSession();
+	review_Mapper  cdao=ss.getMapper(review_Mapper.class);
+	if (cdao.find(m_id,u_id)!=null) {
+	cdao.deletereview(m_id, u_id);
+	ss.commit();
+	return 1;
+	}
+	else return 0;
+		
+	
+}
+public static review findreview(String m_id,String u_id) throws IOException{
+	Reader inputStream=Resources.getResourceAsReader("SqlMapConfig.xml");
+	SqlSessionFactory  ssf=	new SqlSessionFactoryBuilder()
+			.build(inputStream);
+	SqlSession  ss=ssf.openSession();
+	review_Mapper  cdao=ss.getMapper(review_Mapper.class);
+	review a = cdao.find(m_id, u_id);
+	return a;
 	
 	
-	
 
-
+}
 }

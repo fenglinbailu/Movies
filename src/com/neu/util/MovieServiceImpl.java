@@ -20,21 +20,29 @@ import com.neu.po.Movie;
 import com.neu.po.MovieType;
 import com.neu.service.MovieService;
 import com.neuedu.dao.MovieMapper;
+import com.neuedu.dao.AvgranklistMapper;
+import com.neuedu.dao.Hot_listMapper;
 
 public class MovieServiceImpl implements MovieService{
 	private MovieMapper cdao;
+	private AvgranklistMapper adao;
+	private Hot_listMapper bdao;
 	private SqlSession  ss;
 	public  MovieServiceImpl() throws IOException {
-	//Reader inputStream = Resources.getResourceAsReader("SqlMapConfig.xml");
-	FileInputStream inputStream = new FileInputStream("Eclipesworkplace\\\\moviesRecommendSystem\\\\resources/SqlMapConfig.xml");
+	Reader inputStream = Resources.getResourceAsReader("SqlMapConfig.xml");
+	//FileInputStream inputStream = new FileInputStream("Eclipesworkplace\\\\moviesRecommendSystem\\\\resources/SqlMapConfig.xml");
 	SqlSessionFactory  ssf=	new SqlSessionFactoryBuilder()
 			.build(inputStream);
 	SqlSession  ss=ssf.openSession();
 	
 	MovieMapper cdao=ss.getMapper(MovieMapper.class);
+	AvgranklistMapper adao=ss.getMapper(AvgranklistMapper.class);
+	Hot_listMapper bdao=ss.getMapper(Hot_listMapper.class);
 	//Recommend_movie recmov =cc.selectByPrimaryKey(userId);
 	this.ss=ss;
 	this.cdao=cdao;
+	this.adao=adao;
+	this.bdao=bdao;
 	}
 	
 	@Override
@@ -67,38 +75,37 @@ public class MovieServiceImpl implements MovieService{
 		}
 	@Override
 	public List<Movie> getMovieListByName(String mname){
-		
-		List<Movie> list=cdao.findAll();
-		List<Movie> llist = list.stream().filter(s->s.getmName().equals(mname)).collect(Collectors.toList());
-		return llist;	
+		List<Movie> list=cdao.getMovieListByName(mname);
+		//List<Movie> list=cdao.findAll();
+		//List<Movie> llist = list.stream().filter(s->s.getmName().equals(mname)).collect(Collectors.toList());
+		return list;	
 		}
 	@Override
 	public List<Movie> getMovieListByType(String type){
-		
-		List<Movie> list=cdao.findAll();
-		List<Movie> llist = list.stream().filter(s->s.getType().equals(type)).collect(Collectors.toList());
-		return llist;	
+		List<Movie> list=cdao.getMovieListByType(type);
+		//List<Movie> list=cdao.findAll();
+		//List<Movie> llist = list.stream().filter(s->s.getType().equals(type)).collect(Collectors.toList());
+		return list;	
 		}
 	@Override
 	public List<Movie> getRankedMovieListByScore(int num){
-		
-		List<Movie> list=cdao.findAll();
-		//List<Movie> llist = Collections.sort(list , (Movie b1, Movie b2) -> b2.compareTo(b31.getXxx()));
-		Collections.sort(list, new Comparator<Movie>(){
-            public int compare(Movie o1, Movie o2) {
-                return o1.getRate()-o2.getRate();
-            }});
-		Collections.reverse(list);
-		return list.subList(0, num);	
+		List<String> mids=adao.getMovieListByRate(num);
+		List<Movie> list=new ArrayList<Movie>();
+		for(int i=0;i<mids.size();i++) {
+			Movie movie=cdao.selectByPrimaryKey(mids.get(i));
+			list.add(movie);
+		}
+		return list;	
 		}
 	@Override
 	public List<Movie> getRankedMovieListByPopularity(int num){
-		
-		List<Movie> list=cdao.findAll();
-		//List<Movie> llist = Collections.sort(list , (Movie b1, Movie b2) -> b2.compareTo(b31.getXxx()));
-		list.sort((x, y) -> Long.compare(Long.parseLong(x.getStar().replace(",", "")), Long.parseLong(y.getStar().replace(",", ""))));
-		Collections.reverse(list);
-		return list.subList(0, num);	
+		List<String> mids=bdao.getMovieListByHot(num);
+		List<Movie> list=new ArrayList<Movie>();
+		for(int i=0;i<mids.size();i++) {
+			Movie movie=cdao.selectByPrimaryKey(mids.get(i));
+			list.add(movie);
+		}
+		return list;	
 		}
 	@Override
 	public HomeContent getHome(int num,int userId){

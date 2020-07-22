@@ -62,9 +62,12 @@ public class RecommendServlet extends HttpServlet {
 		{
 			response.setCharacterEncoding("UTF-8");  // 加上此处可解决页面js显示乱码问题           
 			PrintWriter out=response.getWriter();
-			StringBuilder jsonString=new StringBuilder("{\"uid\":\""+userId+"\"}");
-			
+			StringBuilder jsonString=new StringBuilder("{\"uid\":\""+userId+"\",\"data\":");
+			jsonString.append("[");
+			jsonString.append("{\"mname\":\" \",\"img\":\" \",\"mid\":\" \"},");
 			System.out.println(jsonString);
+			jsonString=new StringBuilder(jsonString.substring(0, jsonString.length()-1));
+			jsonString.append("]}");
 
 			out.print(jsonString.toString());
 			out.close();

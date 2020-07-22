@@ -39,7 +39,7 @@ $("#loginpage").click(function () {
           else if(a=='1'){
         	  //alert(a)
         	  
-        	  location.href ="index.html";
+        	  location.href ="index.jsp?uid="+u_idInput.val();
           }
           else if(a=='2'){
         	  $("#u_passwd1").text("此id并未注册")

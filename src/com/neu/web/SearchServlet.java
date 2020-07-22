@@ -3,13 +3,12 @@ package com.neu.web;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-
+import org.apache.log4j.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.neu.po.Movie;
 import com.neu.po.User;
 import com.neu.service.MovieService;
@@ -23,6 +22,7 @@ import com.neuedu.dao.MovieMapper;
 @WebServlet("/search")
 public class SearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static Logger logger = Logger.getLogger(SearchServlet.class.getName());
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -36,10 +36,10 @@ public class SearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		// TODO Auto-generated method stub
 		String input=request.getParameter("input");
-	    
-	    System.out.println("request parameter= "+input);
+		logger.info(input);
 	    MovieServiceImpl cc = new MovieServiceImpl();
 		List<Movie> llist=cc.searchmovie(input);
 		response.setCharacterEncoding("UTF-8");  // 加上此处可解决页面js显示乱码问题           

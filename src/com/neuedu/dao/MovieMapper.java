@@ -44,5 +44,12 @@ public interface MovieMapper {
     @Options(statementType = StatementType.CALLABLE)
 	List<Movie> search(String movie) ;
     
+    @Select("select *from movie where m_name=#{mname}")
+    List<Movie> getMovieListByName(String mname);
+    
+    @Select("select *from movie where type like CONCAT(CONCAT('%', #{type}), '%')")
+    List<Movie> getMovieListByType(String type);
+    
+
     
 }

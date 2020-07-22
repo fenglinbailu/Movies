@@ -5,9 +5,8 @@ import java.util.List;
 
 import com.neu.po.Movie;
 
-public interface Recommend {
-	
+public interface MovieRecommend {
 
-	List<Movie> Recommendbyuser(String uid) throws IOException;
+	List<Movie> Recommendbymovie(String mid) throws IOException;
 
 }

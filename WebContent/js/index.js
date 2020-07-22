@@ -41,7 +41,7 @@ $(document)
 										$.each(jsonObj.data,function(i,item) {
 															
 															// 循环获取数据
-															//    
+															//    
 															var mid = item.mid
 															var img = "movie_img/"
 																	+ mid
@@ -130,7 +130,7 @@ $(document)
 														$.each(jsonObj.data,function(i,item) {
 																			
 																			// 循环获取数据
-																			//    
+																			//    
 																			var mid = item.mid
 																			var img = "movie_img/"
 																					+ mid

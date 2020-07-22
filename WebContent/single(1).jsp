@@ -65,35 +65,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="movie_image">
 								<%
                         	String mid=request.getParameter("mid");
-                        	//String mid="2365260";
+								//String mid = "10047547";
+							
                         	%>
+                        	<span style="display:none" id="movieid"><%=request.getParameter("mid") %></span>
 								<span class="movie_rating"><%=new MovieServlet().getMovie(mid).getRate()%></span>
-								<img src=<%="movie_img/"+mid+".jpg"%> onerror="javascript:this.src='images/single.jpg';this.οnerrοr=null" class="img-responsive"
+								<img src=<%="movie_img/"+mid+".jpg"%> class="img-responsive"
 									alt="" />
 							</div>
 							<div class="movie_rate">
 								<div class="rating_desc">
 									<p>Your Vote :</p>
+									<input name='subject' type="radio" value="1"><label>1 </label>
+						 			<input name='subject' type="radio" value="2"/><label>2</label>
+								 	<input name='subject' type="radio" value="3"/><label>3</label>
+						 			<input name='subject' type="radio" value="4"/><label>4</label>
+						 			<input name='subject' type="radio" value="5"/><label>5</label>
 								</div>
-								<form action="" class="sky-form">
-									<fieldset>
-										<section>
-											<div class="rating">
-												<input type="radio" name="stars-rating" value="5" id="stars-rating-5">
-												<label for="stars-rating-5"><i class="icon-star"></i></label>
-												<input type="radio" name="stars-rating" value="4" id="stars-rating-4">
-												<label for="stars-rating-4"><i class="icon-star"></i></label>
-												<input type="radio" name="stars-rating" value="3" id="stars-rating-3">
-												<label for="stars-rating-3"><i class="icon-star"></i></label>
-												<input type="radio" name="stars-rating" value="2"  id="stars-rating-2">
-												<label for="stars-rating-2"><i class="icon-star"></i></label>
-												<input type="radio" name="stars-rating" value="1" id="stars-rating-1">
-												<label for="stars-rating-1"><i class="icon-star"></i></label>
-											</div>
-										</section>
-									</fieldset>
-								</form>
-
+								
 								<div class="clearfix"></div>
 							</div>
 						</div>
@@ -101,7 +90,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 							<p class="movie_option">
-								<strong>Name: </strong><%=new MovieServlet().getMovie(mid).getmName()%></p>
+								<strong >Name: </strong><%=new MovieServlet().getMovie(mid).getmName()%></p>
 							<p class="movie_option">
 								<strong>Director: </strong><%=new MovieServlet().getMovie(mid).getDirector()%></p>
 							<p class="movie_option">
@@ -119,66 +108,55 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								min
 							</p>
 							<div class="down_btn">
-								<a class="btn1" href="javascript:void(0)" onclick="getrate();"><span> </span>Download</a>
-								<script type="text/javascript">
-								function getrate() {
-									var a = $("input[name='stars-rating']:checked").val();
-									
-									
-									
-									alert(a);
-								}
-								</script>
+								<a class="btn1" href="#"><span> </span>Download</a>
 							</div>
 						</div>
 						<div class="clearfix"></div>
 
+
 					</div>
-					
 					<div class="col-md-3">
 						<div class="movie_img">
-					<%
-					String mname=new MovieServlet().getMovieListByrec(mid).get(0).getmName();
-					String mida = new MovieServlet().getMovieListByrec(mid).get(0).getmId();
-					String imgurl="movie_img/"+mida+".jpg";
-					%>
 							<div class="grid_2">
-								<a href="single.jsp?mid=<%=mida%>">
-								<img  src=<%=imgurl%>  onerror="javascript:this.src='images/pic9.jpg';this.οnerrοr=null"
-									class="img-responsive" alt="">
+								<a href="movieindex.jsp"><img src="images/pic6.jpg"
+									class="img-responsive" alt=""></a>
 								<div class="caption1">
-								
-								
-									<p 
-									class="m_3">
-									<%=mname%>
-									</p>
-									
-									
-								</div></a>
+									<ul class="list_5 list_7">
+										<li><i class="icon5"> </i>
+										<p>3,548</p></li>
+									</ul>
+									<i class="icon4 icon6 icon7"> </i>
+									<p class="m_3">Guardians of the Galaxy</p>
+								</div>
 							</div>
 						</div>
 						<div class="grid_2 col_1">
-							<a href="single.jsp?mid=<%=new MovieServlet().getMovieListByrec(mid).get(1).getmId()%>">
-							<img src="<%=new MovieServlet().getMovieListByrec(mid).get(1).getImgurl()%>" onerror="javascript:this.src='images/pic2.jpg';this.οnerrοr=null"
+							<a href="movieindex.jsp"><img src="images/pic2.jpg"
 								class="img-responsive" alt=""></a>
 							<div class="caption1">
-								
-								<p class="m_3"><%=new MovieServlet().getMovieListByrec(mid).get(1).getmName()%></p>
+								<ul class="list_3 list_7">
+									<li><i class="icon5"> </i>
+									<p>3,548</p></li>
+								</ul>
+								<i class="icon4 icon7"> </i>
+								<p class="m_3">Guardians of the Galaxy</p>
 							</div>
 						</div>
 						<div class="grid_2 col_1">
-							<a href="single.jsp?mid=<%=new MovieServlet().getMovieListByrec(mid).get(2).getmId()%>">
-							<img src="<%=new MovieServlet().getMovieListByrec(mid).get(2).getImgurl()%>" onerror="javascript:this.src='images/pic6.jpg';this.οnerrοr=null"
+							<a href="movieindex.jsp"><img src="images/pic9.jpg"
 								class="img-responsive" alt=""></a>
 							<div class="caption1">
-
-
-								<p class="m_3"><%=new MovieServlet().getMovieListByrec(mid).get(2).getmName()%></p>
+								<ul class="list_3 list_7">
+									<li><i class="icon5"> </i>
+									<p>3,548</p></li>
+								</ul>
+								<i class="icon4 icon7"> </i>
+								<p class="m_3">Guardians of the Galaxy</p>
 							</div>
 						</div>
 					</div>
 					<div class="clearfix"></div>
+
 					<form onSubmit="return false;">	
 							<div class="text">
 			                <textarea value="Message:" id="content">Message:</textarea>
@@ -190,7 +168,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							function dbfunc(){
 								
 								
-								//alert("11111111111111111");
+								alert("11111111111111111");
 								 content= $("#content").val();
 								 mid= $("#movieid").text();
 								 uid= $("#userid").text();
@@ -223,7 +201,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					        </div>
 							<div class="clearfix"></div>
                  	</form>
-					<div class="single">
+                 	
+                 	
+                 	<div class="single">
 		                <h1>5 Comments</h1>
 		                <ul class="single_list">
 					        <li>
@@ -280,7 +260,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 		</div>
 	</div>
-	
 	<div class="container">
 		<footer id="footer">
 			<div id="footer-3d">

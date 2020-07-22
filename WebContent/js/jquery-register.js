@@ -1,8 +1,13 @@
 var u_idInput; 
 var u_passwdInput;
 var conu_passwdInput;
+var u_nameInput;
+var p_numberInput;
+var p_dInput;
+var u_sexInput;
+var m_typeInput;
 $("document").ready(function () {
-	
+	// alert("1111111111111")
   
 $("#regsubmit").click(function () {
     // 获得全局变量
@@ -10,6 +15,13 @@ $("#regsubmit").click(function () {
   u_idInput = $('input[name="user_id"]');
   u_passwdInput = $('input[name="passid"]');
   conu_passwdInput = $('input[name="con_passid"]');
+  u_nameInput = $('input[name="username"]');
+  p_numberInput = $('input[name="phone_number"]');
+  p_dInput = $('input[name="Personal_declaration"]');
+  u_sexInput = $('input[name="sex"]:checked');
+  m_typeInput = $("input[name='subject']:checked");
+  //alert(u_nameInput.val());
+ 
   
  // u_idInputv = u_idInput.val();
  // u_passwdInputv = u_passwdInput.val();
@@ -33,7 +45,12 @@ $("#regsubmit").click(function () {
       data: {
         u_id:u_idInput.val(),
         p_id:u_passwdInput.val(),
-        con_id:conu_passwdInput.val()
+        con_id:conu_passwdInput.val(),
+        u_name:u_nameInput.val(),
+        p_number:p_numberInput.val(),
+        p_d:p_dInput.val(),
+        u_sex:u_sexInput.val(),
+        m_type:$("input[name='subject']:checked").val()
       },
       dataType: "text",
      

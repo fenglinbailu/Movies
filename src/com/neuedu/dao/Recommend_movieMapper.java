@@ -18,7 +18,9 @@ public interface Recommend_movieMapper {
    // int insertSelective(Recommend_movie record);
 	@Select("select * from recommend_movie where m_id=#{m_id}")
     Recommend_movie selectByPrimaryKey(String mId);
-
+	
+	@Select("select recommend_movie_id from recommend_movie where m_id=#{m_id}")
+    String findcomov(String mId);
    // int updateByPrimaryKeySelective(Recommend_movie record);
 
 	@Update("update recommend_movie set mid=#{m_id},recommend_movie_id=#{recommend_movie_id}")
