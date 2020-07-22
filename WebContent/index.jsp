@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	import="com.neu.web.MovieServlet" pageEncoding="utf-8"%>
+	import="com.neu.web.MovieServlet" import="com.neu.util.Flumerec" import="com.neu.po.Movie" pageEncoding="utf-8"%>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -36,15 +36,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>
 	<div class="container">
+	<%String uid=request.getParameter("uid");%>
 		<div class="container_wrap">
 			<div class="header_top">
 				<div class="col-sm-3 logo">
-					<a href="index.html"><img src="images/logo.png" alt="" /></a>
+					<a href="index.jsp?uid=<%=uid%>"><img src="images/logo.png" alt="" /></a>
 				</div>
 				<div class="col-sm-6 nav">
 					<ul>
 						<li><span class="simptip-position-bottom simptip-movable"
-							data-tooltip="comic"><a href="movie.html"> </a></span></li>
+							data-tooltip="数据统计"><a href="echarts.jsp"> </a></span></li>
 						<li><span class="simptip-position-bottom simptip-movable"
 							data-tooltip="movie"><a href="movie.html"> </a> </span></li>
 						<li><span class="simptip-position-bottom simptip-movable"
@@ -143,7 +144,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</p>
 					</div>
 					<%		
-                	String uid=request.getParameter("uid");
 					String mname=new MovieServlet().getMovieListByPopularity(6).get(0).getmName();
 					String mid=new MovieServlet().getMovieListByPopularity(6).get(0).getmId();
 					String imgurl="movie_img/"+mid+".jpg";
@@ -168,7 +168,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="movie">
 						<div class="movie-image">
 							<a href="single.jsp?mid=<%=mid+"&&uid="+uid%>"><span class="play"><span
-									class="name"><%=mname %></span></span><img src=<%=imgurl%> alt="movie" /></a>
+									class="name"><%=mname %></span></span><img src=<%=imgurl%> onerror="javascript:this.src='images/pic6.jpg';this.οnerrοr=null" alt="movie" /></a>
 						</div>
 
 					</div>
@@ -182,7 +182,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="movie">
 						<div class="movie-image">
 							<a href="single.jsp?mid=<%=mid+"&&uid="+uid%>"><span class="play"><span
-									class="name"><%=mname %></span></span><img src=<%=imgurl%> alt="movie" /></a>
+									class="name"><%=mname %></span></span><img src=<%=imgurl%> onerror="javascript:this.src='images/pic6.jpg';this.οnerrοr=null"  alt="movie" /></a>
 						</div>
 
 					</div>
@@ -196,7 +196,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="movie">
 						<div class="movie-image">
 							<a href="single.jsp?mid=<%=mid+"&&uid="+uid%>"><span class="play"><span
-									class="name"><%=mname %></span></span><img src=<%=imgurl%> alt="movie" /></a>
+									class="name"><%=mname %></span></span><img src=<%=imgurl%> onerror="javascript:this.src='images/pic6.jpg';this.οnerrοr=null"  alt="movie" /></a>
 						</div>
 
 					</div>
@@ -210,7 +210,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="movie">
 						<div class="movie-image">
 							<a href="single.jsp?mid=<%=mid+"&&uid="+uid%>"><span class="play"><span
-									class="name"><%=mname %></span></span><img src=<%=imgurl%> alt="movie" /></a>
+									class="name"><%=mname %></span></span><img src=<%=imgurl%> onerror="javascript:this.src='images/pic6.jpg';this.οnerrοr=null"  alt="movie" /></a>
 						</div>
 
 					</div>
@@ -224,7 +224,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="movie last">
 						<div class="movie-image">
 							<a href="single.jsp?mid=<%=mid+"&&uid="+uid%>"><span class="play"><span
-									class="name"><%=mname %></span></span><img src=<%=imgurl%> alt="movie" /></a>
+									class="name"><%=mname %></span></span><img src=<%=imgurl%> onerror="javascript:this.src='images/pic6.jpg';this.οnerrοr=null"  alt="movie" /></a>
 						</div>
 
 					</div>
@@ -252,7 +252,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					%>
 							<a href="single.jsp?mid=<%=mid+"&&uid="+uid%>"><span class="play"><span
 									class="name"><%=new MovieServlet().getMovieListByScore(5).get(0).getmName()%></span></span><img
-								src=<%=imgurl%> alt="movie" /></a>
+								src=<%=imgurl%> onerror="javascript:this.src='images/pic6.jpg';this.οnerrοr=null"  alt="movie" /></a>
 						</div>
 
 					</div>
@@ -268,7 +268,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					%>
 							<a href="single.jsp?mid=<%=mid+"&&uid="+uid%>"><span class="play"><span
 									class="name"><%=new MovieServlet().getMovieListByScore(5).get(1).getmName()%></span></span><img
-								src=<%=imgurl%> alt="movie" /></a>
+								src=<%=imgurl%> onerror="javascript:this.src='images/pic6.jpg';this.οnerrοr=null"  alt="movie" /></a>
 						</div>
 
 					</div>
@@ -284,7 +284,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					%>
 							<a href="single.jsp?mid=<%=mid+"&&uid="+uid%>"><span class="play"><span
 									class="name"><%=new MovieServlet().getMovieListByScore(5).get(2).getmName()%></span></span><img
-								src=<%=imgurl%> alt="movie" /></a>
+								src=<%=imgurl%> onerror="javascript:this.src='images/pic6.jpg';this.οnerrοr=null"  alt="movie" /></a>
 						</div>
 
 					</div>
@@ -301,7 +301,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					%>
 							<a href="single.jsp?mid=<%=mid+"&&uid="+uid%>"><span class="play"><span
 									class="name"><%=new MovieServlet().getMovieListByScore(5).get(3).getmName()%></span></span><img
-								src=<%=imgurl%> alt="movie" /></a>
+								src=<%=imgurl%> onerror="javascript:this.src='images/pic6.jpg';this.οnerrοr=null"  alt="movie" /></a>
 						</div>
 
 					</div>
@@ -317,7 +317,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					%>
 							<a href="single.jsp?mid=<%=mid+"&&uid="+uid%>"><span class="play"><span
 									class="name"><%=new MovieServlet().getMovieListByScore(5).get(4).getmName()%></span></span><img
-								src=<%=imgurl%> alt="movie" /></a>
+								src=<%=imgurl%> onerror="javascript:this.src='images/pic6.jpg';this.οnerrοr=null"  alt="movie" /></a>
 						</div>
 
 					</div>
@@ -333,7 +333,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					%>
 							<a href="single.jsp?mid=<%=mid+"&&uid="+uid%>"><span class="play"><span
 									class="name"><%=new MovieServlet().getMovieListByScore(6).get(5).getmName()%></span></span><img
-								src=<%=imgurl%> alt="movie" /></a>
+								src=<%=imgurl%> onerror="javascript:this.src='images/pic6.jpg';this.οnerrοr=null"  alt="movie" /></a>
 						</div>
 
 					</div>
@@ -343,113 +343,32 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<!-- end Box -->
 
 				<!-- Box -->
-				<div class="box">
+				<div class="box" id ="recommend">
 					<div class="head">
-						<h2>MOST RECOMMAND</h2>
+						<h2>猜你喜欢</h2>
 						<p class="text-right">
 							<a href="#">See all</a>
 						</p>
 					</div>
 
-					<!-- Movie -->
-					<div class="movie">
-						<div class="movie-image">
-							<a href="#"><span class="play"><span class="name">HOUSE</span></span><img
-								src="css/images/movie13.jpg" alt="movie" /></a>
-						</div>
-						<div class="rating">
-							<p>RATING</p>
-							<div class="stars">
-								<div class="stars-in"></div>
-							</div>
-							<span class="comments">12</span>
-						</div>
-					</div>
-					<!-- end Movie -->
-
-					<!-- Movie -->
-					<div class="movie">
-						<div class="movie-image">
-							<a href="#"><span class="play"><span class="name">VACANCY</span></span><img
-								src="css/images/movie14.jpg" alt="movie" /></a>
-						</div>
-						<div class="rating">
-							<p>RATING</p>
-							<div class="stars">
-								<div class="stars-in"></div>
-							</div>
-							<span class="comments">12</span>
-						</div>
-					</div>
-					<!-- end Movie -->
-
-					<!-- Movie -->
-					<div class="movie">
-						<div class="movie-image">
-							<a href="#"><span class="play"><span class="name">MIRRORS</span></span><img
-								src="css/images/movie15.jpg" alt="movie" /></a>
-						</div>
-						<div class="rating">
-							<p>RATING</p>
-							<div class="stars">
-								<div class="stars-in"></div>
-							</div>
-							<span class="comments">12</span>
-						</div>
-					</div>
-					<!-- end Movie -->
-
-					<!-- Movie -->
-					<div class="movie">
-						<div class="movie-image">
-							<a href="#"><span class="play"><span class="name">THE
-										KINGDOM</span></span><img src="css/images/movie16.jpg" alt="movie" /></a>
-						</div>
-						<div class="rating">
-							<p>RATING</p>
-							<div class="stars">
-								<div class="stars-in"></div>
-							</div>
-							<span class="comments">12</span>
-						</div>
-					</div>
-					<!-- end Movie -->
-
-					<!-- Movie -->
-					<div class="movie">
-						<div class="movie-image">
-							<a href="#"><span class="play"><span class="name">MOTIVES</span></span><img
-								src="css/images/movie17.jpg" alt="movie" /></a>
-						</div>
-						<div class="rating">
-							<p>RATING</p>
-							<div class="stars">
-								<div class="stars-in"></div>
-							</div>
-							<span class="comments">12</span>
-						</div>
-					</div>
-					<!-- end Movie -->
-
-					<!-- Movie -->
-					<div class="movie last">
-						<div class="movie-image">
-							<a href="#"><span class="play"><span class="name">THE
-										PRESTIGE</span></span><img src="css/images/movie18.jpg" alt="movie" /></a>
-						</div>
-						<div class="rating">
-							<p>RATING</p>
-							<div class="stars">
-								<div class="stars-in"></div>
-							</div>
-							<span class="comments">12</span>
-						</div>
-					</div>
-					<!-- end Movie -->
 					<div class="cl">&nbsp;</div>
+				</div>
+				<div class="box" >
 				</div>
 				<!-- end Box -->
 
+<!-- Box -->
+				<div class="box" id ="flume">
+					<div class="head">
+						<h2>实时推荐</h2>
+						<p class="text-right">
+							<a href="#">See all</a>
+						</p>
+					</div>
+             
+
+				</div>
+				<!-- end Box -->
 			</div>
 			<!-- end Content -->
 

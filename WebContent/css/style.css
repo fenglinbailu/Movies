@@ -1084,6 +1084,7 @@ padding-left: 15px;
 }
 .rating_desc{
 	float:left;
+	font-size:15px;
 }
 .rating_desc p{
 	color:#000;

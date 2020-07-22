@@ -42,11 +42,11 @@ public class Recommendbymovieimpl implements MovieRecommend {
 		if( result!=null) {
 		System.out.println(result);
 		String[] res =result.split(",");
-		System.out.println(res);
+		//System.out.println(res);
 		List <Movie> list1=new ArrayList<Movie>();
 		for(int i=0;i<res.length;i++)
 		{
-			System.out.println(res[i]);
+			//System.out.println(res[i]);
 			MovieServiceImpl aa = new MovieServiceImpl();
 			Movie m=aa.getMovieId(res[i]);
 			//Movie m=aa.getMovieName(res[i]);

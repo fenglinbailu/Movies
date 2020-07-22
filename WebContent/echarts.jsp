@@ -25,9 +25,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>
 <div class="container">
+<%String uid=request.getParameter("uid");%>
 	<div class="container_wrap">
 		<div class="header_top">
-		    <div class="col-sm-3 logo"><a href="index.html"><img src="images/logo.png" alt=""/></a></div>
+		    <div class="col-sm-3 logo"><a href="index.jsp?uid=<%=uid%>"><img src="images/logo.png" alt=""/></a></div>
 		    <div class="col-sm-6 nav">
 			  <ul>
 				 <li> <span class="simptip-position-bottom simptip-movable" data-tooltip="comic"><a href="movie.html"> </a></span></li>
@@ -41,7 +42,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="col-sm-3 header_right">
 			   <ul class="header_right_box">
 				 <li><img src="images/p1.png" alt=""/></li>
-				 <li><p><a href="login.html">Carol Varois</a></p></li>
+				 <li><p><a href="login.html"><%=uid%></a></p></li>
 				 <li class="last"><i class="edit"> </i></li>
 				 <div class="clearfix"> </div>
 			   </ul>

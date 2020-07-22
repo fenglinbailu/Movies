@@ -76,16 +76,4 @@ public class user_info_mybatis {
 	}*/
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }

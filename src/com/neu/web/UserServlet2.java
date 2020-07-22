@@ -13,9 +13,11 @@ import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 
 import com.neu.po.User;
+import com.neu.po.User_info;
 import com.neu.service.UserRepository;
 import com.neu.util.UserRepositoryimpl;
-
+import com.neu.util.user_mybatis;
+import com.neu.util.user_info_mybatis;
 
 /**
  * Servlet implementation class UserServlet
@@ -44,9 +46,18 @@ public class UserServlet2 extends HttpServlet {
     String user=request.getParameter("u_id");
     String pwd=request.getParameter("p_id");
     String cpwd =request.getParameter("con_id");
+    String u_name=request.getParameter("u_name");
+    String p_number=request.getParameter("p_number");
+    String p_d =request.getParameter("p_d");
+    String u_sex =request.getParameter("u_sex");
+    String m_type =request.getParameter("m_type");
+    System.out.println("11111111"+m_type);
     if(pwd.equals(cpwd)) {
     User user1 = new User(user,pwd);
-    System.out.println("request parameter= "+user+":"+pwd);
+    User_info userinfo = new User_info(user,u_name,p_number,p_d,u_sex,m_type);
+   // user_info_mybatis user_info_mybatis1 = new user_info_mybatis();
+   int b = user_info_mybatis.insertUserinfo(userinfo);
+    System.out.println("request parameter= "+userinfo+":"+u_name+p_number+p_d);
    UserRepositoryimpl  userRepository=new UserRepositoryimpl();
     int a=userRepository.insertUser(user1);
     PrintWriter out=response.getWriter(); 

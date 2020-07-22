@@ -4,11 +4,11 @@ public class review {
 	private String m_id;
     private String u_id;
     private String content;
-    private String rank1;
-    public review(String m_id,String u_id,String content,String rank1) {
+    private String rate;
+    public review(String m_id,String u_id,String content,String rate) {
     	this.m_id=m_id;
     	this.u_id=u_id;
-    	this.rank1= rank1;
+    	this.rate= rate;
     	this.content=content;
     	
     }
@@ -22,8 +22,8 @@ public class review {
     public String getcontent() {
         return content;
     }
-    public String getrank() {
-        return rank1;
+    public String getrate() {
+        return rate;
     }
  
 

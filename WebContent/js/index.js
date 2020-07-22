@@ -67,11 +67,7 @@ $(document)
 																	+ '</div>'
 																	+ '<div class="rating">'
 																	+ '<p>'+mname+'</p>'
-																	+ '<div class="stars">'
-																	+ '<div class="stars-in"></div>'
-																	+ '</div>'
-																	+ '<span class="comments">12</span>'
-																	+ '</div>'
+														
 																	
 																	+ '</div>';
 															// $($htmls).insertBefore($('#sresult'));
@@ -86,12 +82,45 @@ $(document)
 									}
 								})
 
-				
+										$.ajax({
+									url : "flume",
+									type : "post",
+									async : false,
+									data : {
+									},
+									//dataType : "text",
 
-					// alert("imgdd")
-					 //$('#tupian1')[0].attr('src', "css/images/movie1.jpg");
-					// alert($('#tupian1')[0].src)
-					// $('#tupian1').prop('src', "css/images/movie1.jpg")
+									error : function(obj) {
+										alert("请求失败");
+									},
+
+									success : function(json) {
+										
+									
+										var jsonObj = JSON
+												.parse(json);
+										$.each(jsonObj.data,function(i,item) {
+
+															var mid = item.mid
+															var img = "movie_img/"+ mid+ ".jpg"
+															var mname = item.mname;
+															var url = "single.jsp?mid="+mid;
+															var $html2 = '';
+															$html2 += 
+																	 '<div class="movie">'
+																	+ '<div class="movie-image">'
+																	+ '<a href="'+url+'"><span class="play"><span class="name">'+mname+'</span></span>'
+																	+ '<img src="'+img+'" alt="movie" /></a>'
+																	+ '</div>'
+																	+ '<div class="rating">'
+																	+ '<p>'+mname+'</p>'
+																	+ '</div>';
+															$('#flume').append($html2)     
+														});
+
+									}
+								})
+
 					$('.add')
 							.click(
 									function() {

@@ -1,5 +1,6 @@
+<%@page import="com.neu.po.Movie" import ="com.neu.po.review" import ="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	import="com.neu.web.MovieServlet" pageEncoding="utf-8"%>
+	import="com.neu.web.MovieServlet" import="com.neu.web.RIZHI" pageEncoding="utf-8"%>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -21,15 +22,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>
 	<div class="container">
+	<%String uid=request.getParameter("uid");
+
+	%>
 		<div class="container_wrap">
 			<div class="header_top">
 				<div class="col-sm-3 logo">
-					<a href="index.html"><img src="images/logo.png" alt="" /></a>
+					<a href="index.jsp?uid=<%=uid%>"><img src="images/logo.png" alt="" /></a>
 				</div>
 				<div class="col-sm-6 nav">
 					<ul>
 						<li><span class="simptip-position-bottom simptip-movable"
-							data-tooltip="comic"><a href="movie.html"> </a></span></li>
+							data-tooltip="comic"><a href="echarts.jsp"> </a></span></li>
 						<li><span class="simptip-position-bottom simptip-movable"
 							data-tooltip="movie"><a href="movie.html"> </a> </span></li>
 						<li><span class="simptip-position-bottom simptip-movable"
@@ -42,11 +46,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							data-tooltip="more"><a href="movie.html"> </a></span></li>
 					</ul>
 				</div>
+
 				<div class="col-sm-3 header_right">
 					<ul class="header_right_box">
-						<%String uid=request.getParameter("uid");%>
-                        	<span style="display:none" id="userid">
-                        	<%=request.getParameter("uid") %></span>
+						
+                        <span style="display:none" id="userid"><%=uid%></span>
          
 						<li><img src="images/p1.png" alt="" /></li>
 						<li><p>
@@ -67,14 +71,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         	String mid=request.getParameter("mid");
                         	//String mid="2365260";
                         	%>
+                        	<span style="display:none" id="movieid"><%=request.getParameter("mid") %></span>
 								<span class="movie_rating"><%=new MovieServlet().getMovie(mid).getRate()%></span>
 								<img src=<%="movie_img/"+mid+".jpg"%> onerror="javascript:this.src='images/single.jpg';this.οnerrοr=null" class="img-responsive"
 									alt="" />
 							</div>
 							<div class="movie_rate">
 								<div class="rating_desc">
-									<p>Your Vote :</p>
+									<% if (MovieServlet.findreview(mid,uid)!=null){ %>
+									<p>Your Vote :<%=MovieServlet.findreview(mid,uid).getrate() %></p>
+									<% } else { %> <p>Your Vote :please rank this movie</p><% } %>
 								</div>
+								<div class="rating_desc">
 								<form action="" class="sky-form">
 									<fieldset>
 										<section>
@@ -93,7 +101,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										</section>
 									</fieldset>
 								</form>
-
+								</div>
+				<script type="text/javascript">
+				$("input[name='stars-rating']").eq(5-<%=MovieServlet.findreview(mid,uid).getrate() %>).attr('checked', 'true');
+				</script>
 								<div class="clearfix"></div>
 							</div>
 						</div>
@@ -122,11 +133,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<a class="btn1" href="javascript:void(0)" onclick="getrate();"><span> </span>Download</a>
 								<script type="text/javascript">
 								function getrate() {
-									var a = $("input[name='stars-rating']:checked").val();
-									
-									
-									
-									alert(a);
+									var a1 = $("input[name='stars-rating']:checked").val();
+	
+									alert(a1);
 								}
 								</script>
 							</div>
@@ -138,43 +147,40 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="col-md-3">
 						<div class="movie_img">
 					<%
-					String mname=new MovieServlet().getMovieListByrec(mid).get(0).getmName();
-					String mida = new MovieServlet().getMovieListByrec(mid).get(0).getmId();
+					java.util.List <Movie> r=new MovieServlet().getMovieListByrec(mid);
+					Movie r0=r.get(0);
+					Movie r1=r.get(1);
+					Movie r2=r.get(2);
+					String mname=r0.getmName();
+					String mida =r0.getmId();
 					String imgurl="movie_img/"+mida+".jpg";
 					%>
 							<div class="grid_2">
-								<a href="single.jsp?mid=<%=mida%>">
+								<a href="single.jsp?mid=<%=mida%>&&uid=<%=uid%>">
 								<img  src=<%=imgurl%>  onerror="javascript:this.src='images/pic9.jpg';this.οnerrοr=null"
-									class="img-responsive" alt="">
+									class="img-responsive" alt=""></a>
 								<div class="caption1">
-								
-								
-									<p 
-									class="m_3">
-									<%=mname%>
-									</p>
-									
-									
-								</div></a>
+                               <p class="m_3"><%=r0.getmName()%></p>
+								</div>
 							</div>
 						</div>
 						<div class="grid_2 col_1">
-							<a href="single.jsp?mid=<%=new MovieServlet().getMovieListByrec(mid).get(1).getmId()%>">
-							<img src="<%=new MovieServlet().getMovieListByrec(mid).get(1).getImgurl()%>" onerror="javascript:this.src='images/pic2.jpg';this.οnerrοr=null"
+							<a href="single.jsp?mid=<%=r1.getmId()%>&&uid=<%=uid%>">
+							<img src=<%="movie_img/"+r1.getmId()+".jpg"%> onerror="javascript:this.src='images/pic2.jpg';this.οnerrοr=null"
 								class="img-responsive" alt=""></a>
 							<div class="caption1">
 								
-								<p class="m_3"><%=new MovieServlet().getMovieListByrec(mid).get(1).getmName()%></p>
+								<p class="m_3"><%=r1.getmName()%></p>
 							</div>
 						</div>
 						<div class="grid_2 col_1">
-							<a href="single.jsp?mid=<%=new MovieServlet().getMovieListByrec(mid).get(2).getmId()%>">
-							<img src="<%=new MovieServlet().getMovieListByrec(mid).get(2).getImgurl()%>" onerror="javascript:this.src='images/pic6.jpg';this.οnerrοr=null"
+							<a href="single.jsp?mid=<%=r2.getmId()%>&&uid=<%=uid%>">
+							<img src=<%="movie_img/"+r2.getmId()+".jpg"%> onerror="javascript:this.src='images/pic6.jpg';this.οnerrοr=null"
 								class="img-responsive" alt=""></a>
 							<div class="caption1">
 
 
-								<p class="m_3"><%=new MovieServlet().getMovieListByrec(mid).get(2).getmName()%></p>
+								<p class="m_3"><%=r2.getmName()%></p>
 							</div>
 						</div>
 					</div>
@@ -184,21 +190,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			                <textarea value="Message:" id="content">Message:</textarea>
 			                </div>
 			                <div class="form-submit1">
-					         <input   onclick="dbfunc()" type="submit" value="Submit"><br>
+					         <input onclick="dbfunc()" type="submit" value="Submit"><br>
 					        
 							<script type="text/javascript">
 							function dbfunc(){
 								
 								
-								//alert("11111111111111111");
-								 content= $("#content").val();
-								 mid= $("#movieid").text();
-								 uid= $("#userid").text();
-								 rank= $("input[name='subject']:checked").val();
-								 alert(mid)
-								 alert(uid)
-								 alert("single.jsp"+"?mid="+mid+"&&uid="+uid)
-								 window.location.href="single.jsp"+"?mid="+mid+"&&uid="+uid+"&&content="+content+"&&rank="+rank
+							//alert("11111111111111111");
+						    content= $("#content").val();
+						    //alert(content);
+						    mid= $("#movieid").text();
+							uid= $("#userid").text();
+							rank= $("input[name='stars-rating']:checked").val();
+							
+							//	 alert("single.jsp"+"?mid="+mid+"&&uid="+uid)
+						    window.location.href="single.jsp"+"?mid="+mid+"&&uid="+uid+"&&content="+content+"&&rank="+rank
 								 //+"?mid="+mid+"&&uid="+uid;
 							
 			                 	
@@ -215,65 +221,90 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							String content=request.getParameter("content");
 							String rank=request.getParameter("rank");
 							if(content!=null){
-			                 	int a = MovieServlet.insertreview(mid, uid,content,rank);
+								review user_review=new review(mid,uid,content,rank);
+								String type = new MovieServlet().getMovie(mid).getType();
+			                 	int a = MovieServlet.updatereview(user_review, type);
 			                 	System.out.print(a);}
 							
 			                 	%>
-							
+				
 					        </div>
 							<div class="clearfix"></div>
                  	</form>
 					<div class="single">
-		                <h1>5 Comments</h1>
+		                <h1> Comments</h1>
+		                <%
+		
+		               List<review> reviewarr= MovieServlet.find5review(mid);
+		               int len = reviewarr.size();
+		                
+		                %>
+		           
 		                <ul class="single_list">
+		                
 					        <li>
-					            <div class="preview"><a href="#"><img src="images/2.jpg" class="img-responsive" alt=""></a></div>
+					        <div class="preview"><a href="#"><img src="images/2.jpg" class="img-responsive" alt=""></a></div>
 					            <div class="data">
-					                <div class="title">Movie  /  2 hours ago  /  <a href="#">reply</a></div>
-					                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
+					                <div class="title">me    
+					                /  <a href="#">reply</a></div>
+					                <% if (MovieServlet.findreview(mid,uid)!=null) { %><p><%=MovieServlet.findreview(mid,uid).getcontent() %></p><% } else { %> <p>leave your comments</p><% } %>
 					            </div>
 					            <div class="clearfix"></div>
+					          
 					        </li>
+					       
 					         <li>
 					            <div class="preview"><a href="#"><img src="images/3.jpg" class="img-responsive" alt=""></a></div>
 					            <div class="data">
-					                <div class="title">Wernay  /  2 hours ago  /  <a href="#">reply</a></div>
-					                <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent </p>
+					                <div class="title">
+					                <% if (len>0) { %><p><%=reviewarr.get(0).getuId() %></p><% } else { %> <p>nobody</p><% } %> 
+					                  /  <a href="#">reply</a></div>
+					                <% if (len>0) { %><p><%=reviewarr.get(0).getcontent() %></p><% } else { %> <p>no more comments</p><% } %> 
 					            </div>
 					            <div class="clearfix"></div>
 					        </li>
-					         <li>
-					            <div class="preview"><a href="#"><img src="images/4.jpg" class="img-responsive" alt=""></a></div>
+							   <li>
+					            <div class="preview"><a href="#"><img src="images/3.jpg" class="img-responsive" alt=""></a></div>
 					            <div class="data">
-					                <div class="title">mr.dev  /  2 hours ago  /  <a href="#">reply</a></div>
-					                <p>Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum. qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram,</p>
-					            </div>
-					           <div class="clearfix"></div>
-					        </li>
-					     	<li class="middle">
-					            <div class="preview"><a href="#"><img src="images/5.jpg" class="img-responsive" alt=""></a></div>
-					            <div class="data-middle">
-					                <div class="title">Wernay  /  2 hours ago  /  <a href="#">reply</a></div>
-					                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+					                <div class="title">
+					                <% if (len>1) { %><p><%=reviewarr.get(1).getuId() %></p><% } else { %> <p>nobody</p><% } %> 
+					                  /  <a href="#">reply</a></div>
+					                <% if (len>1) { %><p><%=reviewarr.get(1).getcontent() %></p><% } else { %> <p>no more comments</p><% } %> 
 					            </div>
 					            <div class="clearfix"></div>
-					        </li>
-					        <li class="last-comment">
-					            <div class="preview"><a href="#"><img src="images/6.jpg" class="img-responsive" alt=""></a></div>
-					            <div class="data-last">
-					                <div class="title">mr.dev  /  2 hours ago  /  <a href="#">reply</a></div>
-					                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit </p>
-					            </div>
-					            <div class="clearfix"></div>
-					        </li>
+					        </li>			        
+					        
 					         <li>
-					            <div class="preview"><a href="#"><img src="images/7.jpg" class="img-responsive" alt=""></a></div>
+					            <div class="preview"><a href="#"><img src="images/3.jpg" class="img-responsive" alt=""></a></div>
 					            <div class="data">
-					                <div class="title">denpro  /  2 hours ago  /  <a href="#">reply</a></div>
-					                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+					                <div class="title">
+					                <% if (len>2) { %><p><%=reviewarr.get(2).getuId() %></p><% } else { %> <p>nobody</p><% } %> 
+					                  /  <a href="#">reply</a></div>
+					                <% if (len>2) { %><p><%=reviewarr.get(2).getcontent() %></p><% } else { %> <p>no more comments</p><% } %> 
 					            </div>
 					            <div class="clearfix"></div>
 					        </li>
+					     	<li>
+					            <div class="preview"><a href="#"><img src="images/3.jpg" class="img-responsive" alt=""></a></div>
+					            <div class="data">
+					                <div class="title">
+					                <% if (len>3) { %><p><%=reviewarr.get(3).getuId() %></p><% } else { %> <p>nobody</p><% } %> 
+					                  /  <a href="#">reply</a></div>
+					                <% if (len>3) { %><p><%=reviewarr.get(3).getcontent() %></p><% } else { %> <p>no more comments</p><% } %> 
+					            </div>
+					            <div class="clearfix"></div>
+					        </li>
+					        <li>
+					            <div class="preview"><a href="#"><img src="images/3.jpg" class="img-responsive" alt=""></a></div>
+					            <div class="data">
+					                <div class="title">
+					                <% if (len>4) { %><p><%=reviewarr.get(4).getuId() %></p><% } else { %> <p>nobody</p><% } %> 
+					                  /  <a href="#">reply</a></div>
+					                <% if (len>4) { %><p><%=reviewarr.get(4).getcontent() %></p><% } else { %> <p>no more comments</p><% } %> 
+					            </div>
+					            <div class="clearfix"></div>
+					        </li>
+
 			  			</ul>
                       </div>
 				</div>
@@ -336,4 +367,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</footer>
 	</div>
 </body>
+<%
+String lo=uid+" "+mid+" 3 ";
+new RIZHI().writelog(lo);%>
 </html>

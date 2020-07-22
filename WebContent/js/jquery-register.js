@@ -7,11 +7,12 @@ var p_dInput;
 var u_sexInput;
 var m_typeInput;
 $("document").ready(function () {
-	// alert("1111111111111")
+	//alert("1111111111111")
   
 $("#regsubmit").click(function () {
     // 获得全局变量
 	//location.reload(true);
+	//alert("1111111111111")
   u_idInput = $('input[name="user_id"]');
   u_passwdInput = $('input[name="passid"]');
   conu_passwdInput = $('input[name="con_passid"]');
@@ -72,7 +73,7 @@ $("#regsubmit").click(function () {
           }
           else if(a=='1'){
         	  //alert(a)
-        	 location.href ="login.html";
+        	 location.href ="index.jsp?uid="+u_idInput.val();
           }
           else if(a=='2'){
         	 //alert("两次密码不一致") ;
@@ -89,7 +90,7 @@ $("#regsubmit").click(function () {
 }
   else if(ret==true&&u_idInput.val().length>6&&u_idInput.val().length<16)
   {
-	  alert("2")
+	  //alert("2")
 	  $("#passid1").text("密码格式不正确");
 	  $("#passid1").css("color","red");
 	  $("#user_id1").text("ok");
@@ -97,7 +98,7 @@ $("#regsubmit").click(function () {
 	  //location.reload(true);
   }  
   else if(ret==true&&u_passwdInput.val().length>6&&u_passwdInput.val().length<16){
-	  alert("3")
+	  //alert("3")
 
 	  $("#user_id1").text("id格式不正确");
 	  $("#user_id1").css("color","red");
@@ -107,7 +108,7 @@ $("#regsubmit").click(function () {
 	  
   }
   else{
-	  alert("4")
+	  //alert("4")
 	  $("#passid1").text("密码格式不正确");
 	  $("#passid1").css("color","red");
 	  $("#user_id1").text("id格式不正确");

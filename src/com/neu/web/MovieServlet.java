@@ -55,31 +55,35 @@ public class MovieServlet{
 		List<Movie> list=movieservice.Recommendbymovie(mid);
 		return list;
 	}
-	public static int insertreview(String a,String b,String c,String d ) throws IOException{
+	public static int insertreview(review user_review,String type) throws IOException{
 		Reader inputStream=Resources.getResourceAsReader("SqlMapConfig.xml");
 		SqlSessionFactory  ssf=	new SqlSessionFactoryBuilder()
 				.build(inputStream);
 		SqlSession  ss=ssf.openSession();
 		review_Mapper  cdao=ss.getMapper(review_Mapper.class);
-		review user_review=new review(a,b,c,d);
-		cdao.insertreview(user_review);
+		
+		cdao.insertreview(user_review.getmId(),user_review.getuId(),type,user_review.getrate(),user_review.getcontent());
 		ss.commit();
 
 	 return 1;
 	}
-public static int updatereview(String a,String b,String c,String d )throws IOException{
+public static int updatereview(review user_review,String type)throws IOException{
 	Reader inputStream=Resources.getResourceAsReader("SqlMapConfig.xml");
 	SqlSessionFactory  ssf=	new SqlSessionFactoryBuilder()
 			.build(inputStream);
 	SqlSession  ss=ssf.openSession();
 	review_Mapper  cdao=ss.getMapper(review_Mapper.class);
-	review user_review=new review(a,b,c,d);
 	if (cdao.find(user_review.getmId(),user_review.getuId())!=null) {
-	cdao.updatereview(user_review);
+	cdao.updatereview(user_review.getmId(),user_review.getuId(),type,user_review.getrate(),user_review.getcontent());
 	ss.commit();
-	return 1;
+	
 	}
-	else return 0;
+	else {
+		cdao.insertreview(user_review.getmId(),user_review.getuId(),type,user_review.getrate(),user_review.getcontent());
+		ss.commit();
+		
+	}
+	return 1;
 }
 public static int deletereview(String m_id,String u_id) throws IOException{
 	Reader inputStream=Resources.getResourceAsReader("SqlMapConfig.xml");
@@ -104,8 +108,20 @@ public static review findreview(String m_id,String u_id) throws IOException{
 	review_Mapper  cdao=ss.getMapper(review_Mapper.class);
 	review a = cdao.find(m_id, u_id);
 	return a;
+		
 	
+}
+public static List<review> find5review(String m_id) throws IOException{
+	Reader inputStream=Resources.getResourceAsReader("SqlMapConfig.xml");
+	SqlSessionFactory  ssf=	new SqlSessionFactoryBuilder()
+			.build(inputStream);
+	SqlSession  ss=ssf.openSession();
+	review_Mapper  cdao=ss.getMapper(review_Mapper.class);
+	List<review> a = cdao.find5(m_id);
+	return a;
+		
 	
+}
+	
+}
 
-}
-}
