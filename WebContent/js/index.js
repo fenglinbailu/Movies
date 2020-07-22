@@ -38,6 +38,7 @@ $(document)
 //										//$($html1).insertBefore($('#sresult'));
 										//alert(jsonObj.data)
 										$('#userlog').text(jsonObj.uid)
+										//var uname = $('#userlog').text()
 										$.each(jsonObj.data,function(i,item) {
 															
 															// 循环获取数据
@@ -46,13 +47,14 @@ $(document)
 															var img = "movie_img/"
 																	+ mid
 																	+ ".jpg"
-
+                                                            var errimg ="movie_img/1 ("+i+").jpg"
+                                                            //alert(errimg)
 															var mname = item.mname;
-
+                                                            
 															// alert(mname)
 															// href="#searchresult.jsp?mname='+mname+'
 															var url = "single.jsp?mid="
-																	+ mid;
+																	+ mid+"&&uid="+jsonObj.uid;
 															
 //                                                            if(i%6==0)
 //                                                            	{
@@ -63,7 +65,7 @@ $(document)
 																	 '<div class="movie">'
 																	+ '<div class="movie-image">'
 																	+ '<a href="'+url+'"><span class="play"><span class="name">'+mname+'</span></span>'
-																	+ '<img src="'+img+'" alt="movie" /></a>'
+																	+ '<img src="'+img+'" onerror="javascript:this.src=\''+errimg+'\';this.οnerrοr=null" alt="movie" /></a>'
 																	+ '</div>'
 																	+ '<div class="rating">'
 																	+ '<p>'+mname+'</p>'
@@ -103,14 +105,15 @@ $(document)
 
 															var mid = item.mid
 															var img = "movie_img/"+ mid+ ".jpg"
+															var errimg ="movie_img/1 ("+i+").jpg"
 															var mname = item.mname;
-															var url = "single.jsp?mid="+mid;
+															var url = "single.jsp?mid="+mid+"&&uid="+$('#userlog').text();
 															var $html2 = '';
 															$html2 += 
 																	 '<div class="movie">'
 																	+ '<div class="movie-image">'
 																	+ '<a href="'+url+'"><span class="play"><span class="name">'+mname+'</span></span>'
-																	+ '<img src="'+img+'" alt="movie" /></a>'
+																	+ '<img src="'+img+'" onerror="javascript:this.src=\''+errimg+'\';this.οnerrοr=null" alt="movie" /></a>'
 																	+ '</div>'
 																	+ '<div class="rating">'
 																	+ '<p>'+mname+'</p>'
@@ -124,6 +127,7 @@ $(document)
 					$('.add')
 							.click(
 									function() {
+										$('#sresult').empty();
 										search = $('input[name="btsearch"]');
 										$.ajax({
 													url : "search",
@@ -164,37 +168,24 @@ $(document)
 																			var img = "movie_img/"
 																					+ mid
 																					+ ".jpg"
-
+																			var errimg ="movie_img/1 ("+i+").jpg"
 																			var mname = item.mname;
 
 																			// alert(mname)
 																			// href="#searchresult.jsp?mname='+mname+'
 																			var url = "single.jsp?mid="
-																					+ mid;
-																			var $htmls = '';
-																			$htmls += '<div class="movie">'
-																					+ '<dl>'
-																					+ '	<dt ><a href='
-																					+ url
-																					+ '> <img src="'
-																					+ img
-																					+ '" /></a> </dt>'
-																					+ '	<dd>'
-																					+ mname
-																					+ '</dd>'
-																					+ '	<dd><a class="del">删除</a></dd>'
-																					+ '	</dl>'
-																					+ '</div>';
-                                                                            if(i%6==0)
-                                                                            	{
-                                                                            	$('#sresult').append($html1)   
-                                                                            	}
+																					+ mid+"&&uid="+$('#userlog').text();
+																			
+                                                                          //  if(i%6==0)
+                                                                          //  	{
+                                                                           // 	$('#sresult').append($html1)   
+                                                                            //	}
 																			var $html2 = '';
 																			$html2 += 
 																					 '<div class="movie">'
 																					+ '<div class="movie-image">'
 																					+ '<a href="'+url+'"><span class="play"><span class="name">'+mname+'</span></span>'
-																					+ '<img src="'+img+'" alt="movie" /></a>'
+																					+ '<img src="'+img+'" onerror="javascript:this.src=\''+errimg+'\';this.οnerrοr=null" alt="movie" /></a>'
 																					+ '</div>'
 																					+ '<div class="rating">'
 																					+ '<p>'+mname+'</p>'
@@ -210,7 +201,7 @@ $(document)
 //																					$html2)
 //																					.insertBefore(
 //																							$('#serrr'));
-																			$('#serrr').append($html2)     
+																			$('#sresult').append($html2)     
 																		});
 
 														// }

@@ -103,7 +103,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								</form>
 								</div>
 				<script type="text/javascript">
-				$("input[name='stars-rating']").eq(5-<%=MovieServlet.findreview(mid,uid).getrate() %>).attr('checked', 'true');
+				<% if (MovieServlet.findreview(mid,uid)!=null){ %>
+				$("input[name='stars-rating']").eq(5-<%=MovieServlet.findreview(mid,uid).getrate()%>).attr('checked', 'true');
+				<% }%>
+				
 				</script>
 								<div class="clearfix"></div>
 							</div>

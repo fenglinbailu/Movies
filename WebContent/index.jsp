@@ -45,7 +45,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="col-sm-6 nav">
 					<ul>
 						<li><span class="simptip-position-bottom simptip-movable"
-							data-tooltip="数据统计"><a href="echarts.jsp"> </a></span></li>
+							data-tooltip="数据统计"><a href="echarts.jsp?uid=<%=uid%>"> </a></span></li>
 						<li><span class="simptip-position-bottom simptip-movable"
 							data-tooltip="movie"><a href="movie.html"> </a> </span></li>
 						<li><span class="simptip-position-bottom simptip-movable"
@@ -117,14 +117,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="search">
 						<form onsubmit="return false;">
 							<input type="text" name="btsearch" value="Search..." onfocus="this.value='';">
-								 <input type="submit" value="" class="add">
+								 <input type="submit" value="" class="add" >
 						</form>
 					</div>
 					<div class="clearfix"></div>
 				</div>
 			</div>
 			<div class="content">
-				<div class="box_1" id="sresult"></div>
+				<div class="box" id="sresult">
+				</div>
 			</div>
 
 		</div>
@@ -154,7 +155,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="movie-image">
 
 							<a href="single.jsp?mid=<%=mid+"&&uid="+uid%>"><span class="play"><span
-									class="name"><%=mname %></span></span><img src=<%=imgurl%> onerror="javascript:this.src='images/pic9.jpg';this.οnerrοr=null" alt="movie" /></a>
+									class="name"><%=mname %></span></span><img src=<%=imgurl%> onerror="javascript:this.src='css/images/movie7.jpg';this.οnerrοr=null" alt="movie" /></a>
 						</div>
 
 					</div>
@@ -168,7 +169,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="movie">
 						<div class="movie-image">
 							<a href="single.jsp?mid=<%=mid+"&&uid="+uid%>"><span class="play"><span
-									class="name"><%=mname %></span></span><img src=<%=imgurl%> onerror="javascript:this.src='images/pic6.jpg';this.οnerrοr=null" alt="movie" /></a>
+									class="name"><%=mname %></span></span><img src=<%=imgurl%> onerror="javascript:this.src='css/images/movie8.jpg';this.οnerrοr=null" alt="movie" /></a>
 						</div>
 
 					</div>
@@ -182,7 +183,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="movie">
 						<div class="movie-image">
 							<a href="single.jsp?mid=<%=mid+"&&uid="+uid%>"><span class="play"><span
-									class="name"><%=mname %></span></span><img src=<%=imgurl%> onerror="javascript:this.src='images/pic6.jpg';this.οnerrοr=null"  alt="movie" /></a>
+									class="name"><%=mname %></span></span><img src=<%=imgurl%> onerror="javascript:this.src='css/images/movie9.jpg';this.οnerrοr=null"  alt="movie" /></a>
 						</div>
 
 					</div>
@@ -196,7 +197,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="movie">
 						<div class="movie-image">
 							<a href="single.jsp?mid=<%=mid+"&&uid="+uid%>"><span class="play"><span
-									class="name"><%=mname %></span></span><img src=<%=imgurl%> onerror="javascript:this.src='images/pic6.jpg';this.οnerrοr=null"  alt="movie" /></a>
+									class="name"><%=mname %></span></span><img src=<%=imgurl%> onerror="javascript:this.src='css/images/movie10.jpg';this.οnerrοr=null"  alt="movie" /></a>
 						</div>
 
 					</div>
@@ -210,7 +211,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="movie">
 						<div class="movie-image">
 							<a href="single.jsp?mid=<%=mid+"&&uid="+uid%>"><span class="play"><span
-									class="name"><%=mname %></span></span><img src=<%=imgurl%> onerror="javascript:this.src='images/pic6.jpg';this.οnerrοr=null"  alt="movie" /></a>
+									class="name"><%=mname %></span></span><img src=<%=imgurl%> onerror="javascript:this.src='css/images/movie11.jpg';this.οnerrοr=null"  alt="movie" /></a>
 						</div>
 
 					</div>
@@ -224,7 +225,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="movie last">
 						<div class="movie-image">
 							<a href="single.jsp?mid=<%=mid+"&&uid="+uid%>"><span class="play"><span
-									class="name"><%=mname %></span></span><img src=<%=imgurl%> onerror="javascript:this.src='images/pic6.jpg';this.οnerrοr=null"  alt="movie" /></a>
+									class="name"><%=mname %></span></span><img src=<%=imgurl%> onerror="javascript:this.src='css/images/movie12.jpg';this.οnerrοr=null"  alt="movie" /></a>
 						</div>
 
 					</div>
@@ -252,7 +253,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					%>
 							<a href="single.jsp?mid=<%=mid+"&&uid="+uid%>"><span class="play"><span
 									class="name"><%=new MovieServlet().getMovieListByScore(5).get(0).getmName()%></span></span><img
-								src=<%=imgurl%> onerror="javascript:this.src='images/pic6.jpg';this.οnerrοr=null"  alt="movie" /></a>
+								src=<%=imgurl%> onerror="javascript:this.src='css/images/movie13.jpg';this.οnerrοr=null"  alt="movie" /></a>
 						</div>
 
 					</div>
@@ -268,7 +269,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					%>
 							<a href="single.jsp?mid=<%=mid+"&&uid="+uid%>"><span class="play"><span
 									class="name"><%=new MovieServlet().getMovieListByScore(5).get(1).getmName()%></span></span><img
-								src=<%=imgurl%> onerror="javascript:this.src='images/pic6.jpg';this.οnerrοr=null"  alt="movie" /></a>
+								src=<%=imgurl%> onerror="javascript:this.src='css/images/movie14.jpg';this.οnerrοr=null"  alt="movie" /></a>
 						</div>
 
 					</div>
@@ -284,7 +285,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					%>
 							<a href="single.jsp?mid=<%=mid+"&&uid="+uid%>"><span class="play"><span
 									class="name"><%=new MovieServlet().getMovieListByScore(5).get(2).getmName()%></span></span><img
-								src=<%=imgurl%> onerror="javascript:this.src='images/pic6.jpg';this.οnerrοr=null"  alt="movie" /></a>
+								src=<%=imgurl%> onerror="javascript:this.src='css/images/movie15.jpg';this.οnerrοr=null"  alt="movie" /></a>
 						</div>
 
 					</div>
@@ -301,7 +302,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					%>
 							<a href="single.jsp?mid=<%=mid+"&&uid="+uid%>"><span class="play"><span
 									class="name"><%=new MovieServlet().getMovieListByScore(5).get(3).getmName()%></span></span><img
-								src=<%=imgurl%> onerror="javascript:this.src='images/pic6.jpg';this.οnerrοr=null"  alt="movie" /></a>
+								src=<%=imgurl%> onerror="javascript:this.src='css/images/movie16.jpg';this.οnerrοr=null"  alt="movie" /></a>
 						</div>
 
 					</div>
@@ -317,7 +318,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					%>
 							<a href="single.jsp?mid=<%=mid+"&&uid="+uid%>"><span class="play"><span
 									class="name"><%=new MovieServlet().getMovieListByScore(5).get(4).getmName()%></span></span><img
-								src=<%=imgurl%> onerror="javascript:this.src='images/pic6.jpg';this.οnerrοr=null"  alt="movie" /></a>
+								src=<%=imgurl%> onerror="javascript:this.src='css/images/movie17.jpg';this.οnerrοr=null"  alt="movie" /></a>
 						</div>
 
 					</div>
@@ -333,7 +334,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					%>
 							<a href="single.jsp?mid=<%=mid+"&&uid="+uid%>"><span class="play"><span
 									class="name"><%=new MovieServlet().getMovieListByScore(6).get(5).getmName()%></span></span><img
-								src=<%=imgurl%> onerror="javascript:this.src='images/pic6.jpg';this.οnerrοr=null"  alt="movie" /></a>
+								src=<%=imgurl%> onerror="javascript:this.src='css/images/movie18.jpg';this.οnerrοr=null"  alt="movie" /></a>
 						</div>
 
 					</div>
